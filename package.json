@@ -1,0 +1,19 @@
+{
+  "name": "pvs",
+  "version": "1.0.0",
+  "description": "untuk pemrograman visual",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "VisProg"
+  },
+  "author": "Ieffe",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^8.0.2",
+    "save": "^2.4.0"
+  }
+}
