@@ -40,7 +40,7 @@ const listWindowCreator = () => {
     });
 
     listWindow.setMenu(null);
-    listWindow.loadURL(`file://${__dirname}/create.html`);
+    listWindow.loadURL(`file://${__dirname}/list.html`);
     listWindow.on("closed", () => (listWindow = null));
 };
 
@@ -55,15 +55,19 @@ const createWindowCreator = () => {
     });
 
     createWindow.setMenu(null);
-    createWindow.loadURL(`file://${__dirname}/list.html`);
+    createWindow.loadURL(`file://${__dirname}/create.html`);
     createWindow.on("closed", () => (createWindow = null));
 };
+
+ipcMain.on("appointment:create", (event, appointment)=>{
+    console.log(appointment);
+})
 
 const menuTemplate=[
     {
         label: "File",
         submenu: [{
-            label: "Random Submenu",
+            label: "Create",
             click(){
                 createWindowCreator();
             }
@@ -76,7 +80,7 @@ const menuTemplate=[
         },
         {
             label: "Quit",
-            accelerato:process.platform === "darwin" ? "Command+Q" : "Ctrl+Q",
+            accelerator:process.platform === "darwin" ? "Command+Q" : "Ctrl+Q",
             click(){
                 app.quit();
             }   
