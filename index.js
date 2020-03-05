@@ -9,6 +9,8 @@ const {
 let todayWindow;
 let createWindow;
 let listWindow;
+let aboutWindow;
+app.allowRendererProcessReuse = false;
 
 app.on("ready", ()=>{ 
     todayWindow = new BrowserWindow({
@@ -59,6 +61,21 @@ const createWindowCreator = () => {
     createWindow.on("closed", () => (createWindow = null));
 };
 
+const aboutWindowCreator = () => {
+    aboutWindow = new BrowserWindow({
+       webPreferences: {
+           nodeIntegration: true
+       },
+       width: 600,
+       height: 400,
+       title: "About"
+    });
+
+    aboutWindow.setMenu(null);
+    aboutWindow.loadURL(`file://${__dirname}/about.html`);
+    aboutWindow.on("closed", () => (aboutWindow = null));
+}
+
 ipcMain.on("appointment:create", (event, appointment)=>{
     console.log(appointment);
 })
@@ -92,6 +109,17 @@ const menuTemplate=[
         label: "View",
         submenu:[{role: "reload"}, {role:"toggledevtools"}]
 
+    },
+    {
+        label: "About",
+        submenu:[
+            {
+                label: "About Us",
+                click(){
+                    aboutWindowCreator();
+                }
+            }
+        ]
     }
 
 ]
