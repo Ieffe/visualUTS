@@ -10,7 +10,10 @@
     <script>
         const electron = require("electron");
         const {ipcRenderer} = electron;
-        ipcRenderer.send("appointment:request:list", (event, appointments) => {
+
+        ipcRenderer.send("appointment:request:list");
+
+        ipcRenderer.on("appointment:request:list", (event, appointments) => {
             const listDiv = document.getElementById("List");
             appointments.forEach(appointment => {
                 const appointmentDiv = document.createElement("div");
